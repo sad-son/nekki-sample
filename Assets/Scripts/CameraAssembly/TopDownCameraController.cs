@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameplayDependencies;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Rendering;
 
 namespace CameraAssembly
 {
-    public class TopDownCameraController : MonoBehaviour
+    public class TopDownCameraController : MonoBehaviour, ICameraController
     {
         [SerializeField] private Camera _camera;
         [SerializeField] private TopDownCameraConfig _cameraConfig;
@@ -27,12 +28,23 @@ namespace CameraAssembly
             SetCameraState(CameraState.Idle);
         }
 
-        private void SetTarget(Transform target)
+        private void OnDestroy()
+        {
+            Dispose();
+        }
+
+        public void Dispose()
+        {
+            _cameraTarget = null;
+            _cameraStates.Clear();
+        }
+        
+        public void SetTarget(Transform target)
         {
             _cameraTarget = target;
         }
         
-        private void SetCameraState(CameraState state)
+        public void SetCameraState(CameraState state)
         {
             _currentCameraSetting = _cameraStates[state];
         }
