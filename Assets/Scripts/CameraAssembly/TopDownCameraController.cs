@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using GameplayDependencies;
+﻿using System.Collections.Generic;
+using ServiceLocatorSystem;
+using SpawnerAssembly;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Rendering;
 
 namespace CameraAssembly
 {
@@ -15,17 +14,20 @@ namespace CameraAssembly
         private Dictionary<CameraState, CameraSetting> _cameraStates; 
         private CameraSetting _currentCameraSetting;
         private Transform _cameraTarget;
-
+        private MyCharacterDependency _characterDependency;
+        
         private void OnValidate()
         {
             Assert.IsNotNull(_camera);
             Assert.IsNotNull(_cameraConfig);
         }
 
-        private void Awake()
+        public void Initialize()
         {
             _cameraStates = _cameraConfig.GetSettingsDictionary();
             SetCameraState(CameraState.Idle);
+            _characterDependency = ServiceLocatorController.Resolve<SpawnerContainer>().Resolve<MyCharacterDependency>();
+            SetTarget(_characterDependency.Character);
         }
 
         private void OnDestroy()
@@ -54,19 +56,18 @@ namespace CameraAssembly
             if (!_cameraTarget) return;
             
             SetCameraPosition(_cameraTarget.position);
-            //  SetFieldOfView(GetCurrentCameraState.CameraFieldOfView);
         }
 
         private void SetCameraPosition(Vector3 targetPosition)
         {
             if (_currentCameraSetting.smoothMove)
             {
-                _camera.transform.position = Vector3.Lerp(transform.position, targetPosition,
-                    _currentCameraSetting.movementSpeed * Time.fixedDeltaTime);
+                transform.transform.position = Vector3.Lerp(transform.position, targetPosition,
+                    _currentCameraSetting.movementSpeed * Time.deltaTime);
             }
             else
             {
-                _camera.transform.position = targetPosition;
+                transform.transform.position = targetPosition;
             }
         }
     }

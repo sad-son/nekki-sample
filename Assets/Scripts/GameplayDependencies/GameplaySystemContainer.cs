@@ -10,6 +10,7 @@ namespace GameplayDependencies
         public GameplaySystemContainer(ICameraController cameraController)
         {
             _cameraController = cameraController;
+            _cameraController.Initialize();
         }
         
         protected override void RegisterTypes()

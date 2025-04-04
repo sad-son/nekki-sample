@@ -3,9 +3,10 @@
 namespace CharacterAssembly.Movement
 {
     [Serializable]
-    public struct MovementSettings
+    public class MovementSettings
     {
         public MoverType moverType;
         public float movementSpeed;
+        public float rotationSpeed;
     }
 }

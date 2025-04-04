@@ -1,19 +1,26 @@
 ﻿using System.Collections.Generic;
+using CharacterAssembly.Movement.Movers;
+using InputAssembly;
+using ServiceLocatorSystem;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace CharacterAssembly.Movement
 {
     [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(AnimatorController))]
     public class MovementController : MonoBehaviour
     {
         [SerializeField] private MovementConfig _movementConfig;
-        [SerializeField] private CharacterController _characterController;
+        
+        [field: SerializeField] public CharacterController CharacterController { get; private set; }
+        [field: SerializeField] public AnimatorController AnimatorController { get; private set; }
         
         private readonly Dictionary<MoverType, IMover> _moversDictionary = new();
-        
+
         private Dictionary<MoverType, MovementSettings> _moversSettingsDictionary = new();
         private IMover _currentMover;
+        private InputExecutor _inputExecutor;
         
         private void OnValidate()
         {
@@ -22,25 +29,45 @@ namespace CharacterAssembly.Movement
         
         private void Awake()
         {
+            _inputExecutor = ServiceLocatorController.Resolve<InputSystemContainer>().Resolve<InputExecutor>();
             _moversSettingsDictionary = _movementConfig.GetSettingsDictionary();
 
-            _moversDictionary.Add(MoverType.Walk, new WalkMover(_characterController, _moversSettingsDictionary[MoverType.Walk]));
-            _moversDictionary.Add(MoverType.Run, new RunMover(_characterController, _moversSettingsDictionary[MoverType.Run]));
+            _moversDictionary.Add(MoverType.Idle, new IdleMover(this, _moversSettingsDictionary[MoverType.Idle]));
+            _moversDictionary.Add(MoverType.Walk, new WalkMover(this, _moversSettingsDictionary[MoverType.Walk]));
+            _moversDictionary.Add(MoverType.Run, new RunMover(this, _moversSettingsDictionary[MoverType.Run]));
 
-            SetCurrentMover(MoverType.Walk);
+            SetMover(MoverType.Idle);
         }
         
-        private void SetCurrentMover(MoverType moverType)
+        public void SetMover(MoverType moverType)
         {
             var newMover = _moversDictionary[moverType];
             if (newMover != null && _currentMover == newMover) return;
 
-            _currentMover = _moversDictionary[moverType];
+            _currentMover?.Exit();
+            _currentMover = newMover;
+            _currentMover?.Enter();
         }
 
         private void FixedUpdate()
         {
-            _currentMover.Move(Time.fixedDeltaTime);
+            var moveInput = _inputExecutor.MoveInput;
+            var movementDirection = new Vector3(moveInput.x, 0, moveInput.y).normalized;
+            if (movementDirection == Vector3.zero)
+            {
+                SetMover(MoverType.Idle);
+                return;
+            }
+
+            if (_inputExecutor.Sprint)
+            {
+                SetMover(MoverType.Run);
+            }
+            else
+            {
+                SetMover(MoverType.Walk);
+            }
+            _currentMover.Move(Time.fixedDeltaTime, movementDirection);
         }
     }
 }

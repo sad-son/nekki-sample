@@ -1,4 +1,5 @@
-﻿using CameraAssembly;
+﻿using System.Collections;
+using CameraAssembly;
 using InputAssembly;
 using ServiceLocatorSystem;
 using SpawnerAssembly;
@@ -19,14 +20,16 @@ namespace GameplayDependencies
             Assert.IsNotNull(_characterPrefab);
             Assert.IsNotNull(_characterSpawnPoint);
         }
-        
-        private void Awake()
+
+        private IEnumerator Start()
         {
-            ServiceLocatorController.Register(new GameplaySystemContainer(_cameraController));
             ServiceLocatorController.Register(new InputSystemContainer());
             ServiceLocatorController.Register(new SpawnerContainer(_characterPrefab, _characterSpawnPoint));
             
-            ServiceLocatorController.Resolve<SpawnerContainer>().Resolve<CharacterSpawner>().Spawn();
+            ServiceLocatorController.Resolve<SpawnerContainer>().Resolve<MyCharacterDependency>().Spawn();
+            
+            yield return null;
+            ServiceLocatorController.Register(new GameplaySystemContainer(_cameraController));
         }
     }
 }

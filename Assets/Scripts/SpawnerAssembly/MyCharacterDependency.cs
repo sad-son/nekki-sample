@@ -3,12 +3,14 @@ using UnityEngine;
 
 namespace SpawnerAssembly
 {
-    public class CharacterSpawner : IGameplayDependency
+    public class MyCharacterDependency : IGameplayDependency
     {
         private readonly GameObject _characterPrefab;
         private readonly Transform _spawnPoint;
-
-        public CharacterSpawner(GameObject characterPrefab, Transform spawnPoint)
+        
+        public Transform Character { get; private set; }
+        
+        public MyCharacterDependency(GameObject characterPrefab, Transform spawnPoint)
         {
             _characterPrefab = characterPrefab;
             _spawnPoint = spawnPoint;
@@ -16,7 +18,8 @@ namespace SpawnerAssembly
 
         public void Spawn()
         {
-            Object.Instantiate(_characterPrefab, _spawnPoint.position, _spawnPoint.rotation);
+            var instance = Object.Instantiate(_characterPrefab, _spawnPoint.position, _spawnPoint.rotation);
+            Character = instance.transform;
         }
         
         public void Dispose()

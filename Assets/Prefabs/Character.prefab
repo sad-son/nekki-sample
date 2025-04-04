@@ -1061,6 +1061,8 @@ GameObject:
   - component: {fileID: 3972964382691556668}
   - component: {fileID: 6714595725665016791}
   - component: {fileID: 6678988939370845626}
+  - component: {fileID: 5152725217173751310}
+  - component: {fileID: 431820105652041550}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -1125,7 +1127,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -1145,7 +1147,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementConfig: {fileID: 11400000, guid: d3a20140226f7884fa327ba8d0384ff4, type: 2}
-  _characterController: {fileID: 6714595725665016791}
+  <CharacterController>k__BackingField: {fileID: 6714595725665016791}
+  <AnimatorController>k__BackingField: {fileID: 5152725217173751310}
+--- !u!114 &5152725217173751310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3972964382682025698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a9808eb8b734ad3b9110147fb48d06a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 3972964382691556668}
+--- !u!136 &431820105652041550
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3972964382682025698}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5750269
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.71825725, z: 0}
 --- !u!1 &3972964382682025700
 GameObject:
   m_ObjectHideFlags: 0

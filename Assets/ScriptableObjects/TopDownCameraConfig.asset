@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraSettings:
   - state: 0
-    movementSpeed: 10
+    movementSpeed: 3
     smoothMove: 1

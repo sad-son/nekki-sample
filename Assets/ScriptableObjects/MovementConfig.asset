@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSettings:
   - moverType: 0
-    movementSpeed: 10
+    movementSpeed: 0
+    rotationSpeed: 0
   - moverType: 1
-    movementSpeed: 20
+    movementSpeed: 3
+    rotationSpeed: 5
+  - moverType: 2
+    movementSpeed: 7
+    rotationSpeed: 5

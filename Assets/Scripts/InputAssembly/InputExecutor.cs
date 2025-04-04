@@ -7,7 +7,8 @@ namespace InputAssembly
     {
         private readonly PlayerInputActions _inputActions;
         
-        public Vector2 MoveInput { get; private set; } 
+        public Vector2 MoveInput { get; private set; }
+        public bool Sprint { get; private set; }
         
         public InputExecutor()
         {
@@ -15,26 +16,38 @@ namespace InputAssembly
             _inputActions.Enable();
             _inputActions.Player.Move.performed += OnMove;
             _inputActions.Player.Move.canceled += OnMoveCanceled;
+            _inputActions.Player.Sprint.performed += OnSprint;
+            _inputActions.Player.Sprint.canceled += OnSprintCanceled;
         }
         
         public void Dispose()
         {
             _inputActions.Player.Move.performed -= OnMove;
             _inputActions.Player.Move.canceled -= OnMoveCanceled;
+            _inputActions.Player.Sprint.performed -= OnSprint;
+            _inputActions.Player.Sprint.canceled -= OnSprintCanceled;
             _inputActions.Disable();
             _inputActions.Dispose();
+        }
+        
+        private void OnSprint(InputAction.CallbackContext obj)
+        {
+            Sprint = true;
+        }
+        
+        private void OnSprintCanceled(InputAction.CallbackContext obj)
+        {
+            Sprint = false;
         }
 
         private void OnMove(InputAction.CallbackContext context)
         {
             MoveInput = context.ReadValue<Vector2>();
-            Debug.Log($"Move Input {MoveInput.x}, {MoveInput.y}");
         }
-
+        
         private void OnMoveCanceled(InputAction.CallbackContext obj)
         {
             MoveInput = Vector2.zero;
-            Debug.Log($"Move Input {MoveInput.x}, {MoveInput.y}");
         }
     }
 }

@@ -17,7 +17,7 @@ namespace SpawnerAssembly
 
         protected override void RegisterTypes()
         {
-            Register(new CharacterSpawner(_characterPrefab, _characterSpawnPoint));
+            Register(new MyCharacterDependency(_characterPrefab, _characterSpawnPoint));
         }
     }
 }
