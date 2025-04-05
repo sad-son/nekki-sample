@@ -41,12 +41,12 @@ namespace CharacterAssembly.Movement.Movers
         public Quaternion GetRotation(Transform transform, float deltaTime)
         {
             var targetRotation = Quaternion.LookRotation(_movementDirection);
-            return Quaternion.Slerp(transform.rotation, targetRotation, _movementSettings.rotationSpeed * deltaTime);
+            return Quaternion.Slerp(transform.rotation, targetRotation, _movementSettings.RotationSpeed * deltaTime);
         }
 
         public Vector3 GetVelocity(float deltaTime)
         {
-            return _movementDirection * (_movementSettings.movementSpeed * deltaTime);
+            return _movementDirection * (_movementSettings.MovementSpeed * deltaTime);
         }
     }
 }

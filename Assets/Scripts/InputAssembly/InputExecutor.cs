@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace InputAssembly
@@ -6,6 +7,8 @@ namespace InputAssembly
     public class InputExecutor : IInputSystemDependency
     {
         private readonly PlayerInputActions _inputActions;
+
+        public event Action OnSelected;
         
         public Vector2 MoveInput { get; private set; }
         public bool Sprint { get; private set; }
@@ -18,6 +21,7 @@ namespace InputAssembly
             _inputActions.Player.Move.canceled += OnMoveCanceled;
             _inputActions.Player.Sprint.performed += OnSprint;
             _inputActions.Player.Sprint.canceled += OnSprintCanceled;
+            _inputActions.Player.Select.performed += OnSelectPerformed;
         }
         
         public void Dispose()
@@ -26,10 +30,16 @@ namespace InputAssembly
             _inputActions.Player.Move.canceled -= OnMoveCanceled;
             _inputActions.Player.Sprint.performed -= OnSprint;
             _inputActions.Player.Sprint.canceled -= OnSprintCanceled;
+            _inputActions.Player.Select.performed -= OnSelectPerformed;
             _inputActions.Disable();
             _inputActions.Dispose();
         }
-        
+
+        private void OnSelectPerformed(InputAction.CallbackContext obj)
+        {
+            OnSelected?.Invoke();
+        }
+
         private void OnSprint(InputAction.CallbackContext obj)
         {
             Sprint = true;

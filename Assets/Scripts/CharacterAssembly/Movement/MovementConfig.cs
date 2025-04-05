@@ -13,9 +13,9 @@ namespace CharacterAssembly.Movement
             var result = new Dictionary<MoverType, MovementSettings>();
             foreach (var movementSettings in _movementSettings)
             {
-                if (!result.TryAdd(movementSettings.moverType, movementSettings))
+                if (!result.TryAdd(movementSettings.MoverType, movementSettings))
                 {
-                    Debug.LogWarning($"Duplicate setting: {movementSettings.moverType}");
+                    Debug.LogWarning($"Duplicate setting: {movementSettings.MoverType}");
                 }
             }
             

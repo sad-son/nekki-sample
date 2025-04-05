@@ -7,6 +7,14 @@ namespace ServiceLocatorSystem
     {
         private static readonly Dictionary<Type, object> _services = new();
         
+        public static bool TryResolve<T>(out T value) where T : class, IServiceLocator
+        {
+            var type = typeof(T);
+            var result = _services.TryGetValue(type, out var obj);
+            value = obj as T;
+            return result;
+        }
+        
         public static T Resolve<T>() where T : class, IServiceLocator
         {
             return _services[typeof(T)] as T;

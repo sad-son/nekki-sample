@@ -8,16 +8,21 @@ namespace SpawnerAssembly
     {
         private readonly GameObject _characterPrefab;
         private readonly Transform _characterSpawnPoint;
-
-        public SpawnerContainer(GameObject characterPrefab, Transform characterSpawnPoint)
+        private readonly EnemiesConfig _enemiesConfig;
+        private readonly Transform _enemiesRoot;
+        
+        public SpawnerContainer(GameObject characterPrefab, Transform characterSpawnPoint, EnemiesConfig enemiesConfig, Transform enemiesRoot)
         {
             _characterPrefab = characterPrefab;
             _characterSpawnPoint = characterSpawnPoint;
+            _enemiesConfig = enemiesConfig;
+            _enemiesRoot = enemiesRoot;
         }
 
         protected override void RegisterTypes()
         {
             Register(new MyCharacterDependency(_characterPrefab, _characterSpawnPoint));
+            Register(new EnemiesSpawner(_enemiesConfig, _enemiesRoot));
         }
     }
 }
