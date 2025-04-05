@@ -14,6 +14,7 @@ namespace CharacterAssembly
         {
             _characterPrefab = characterPrefab;
             _spawnPoint = spawnPoint;
+            Spawn();
         }
 
         public void Spawn()

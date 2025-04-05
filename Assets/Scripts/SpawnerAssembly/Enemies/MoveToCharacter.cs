@@ -1,6 +1,7 @@
 ﻿using CharacterAssembly;
 using ServiceLocatorSystem;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace SpawnerAssembly
 {
@@ -10,11 +11,12 @@ namespace SpawnerAssembly
         [SerializeField] private float _moveSpeed = 5f;
         [SerializeField] private float _rotationSpeed = 5f;
         [SerializeField] private Animator _animator;
+        [SerializeField] private NavMeshAgent _navMeshAgent;
         
         private MyCharacterDependency _characterDependency;
         private Rigidbody _rigidbody;
-        
-        private void Awake()
+
+        public void Setup()
         {
             _characterDependency = ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<MyCharacterDependency>();
             _rigidbody = GetComponent<Rigidbody>();
@@ -22,6 +24,7 @@ namespace SpawnerAssembly
 
         private void Start()
         {
+            _navMeshAgent.enabled = false;
             Run();
         }
 
@@ -30,16 +33,20 @@ namespace SpawnerAssembly
             Run();
         }
 
+        private void OnDisable()
+        {
+            _navMeshAgent.enabled = false;
+        }
+
         private void Run()
         {
             _animator.SetBool(AnimatorHashes.Run, true);
+            _navMeshAgent.enabled = true;
         }
         
         private void FixedUpdate()
         {
-            _rigidbody.position = Vector3.MoveTowards(transform.position, 
-                _characterDependency.Character.transform.position, _moveSpeed * Time.fixedDeltaTime);
-            
+            _navMeshAgent.SetDestination(_characterDependency.Character.transform.position);
             SetRotation(_characterDependency.Character.transform.position, _rotationSpeed * Time.fixedDeltaTime);
         }
 

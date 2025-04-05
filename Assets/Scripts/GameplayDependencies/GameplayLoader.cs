@@ -30,7 +30,7 @@ namespace GameplayDependencies
             ServiceLocatorController.Register(new InputSystemContainer());
             ServiceLocatorController.Register(new SpawnerContainer(_spawnDependencies, _configsContainer));
             
-            ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<MyCharacterDependency>().Spawn();
+            //ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<MyCharacterDependency>().Spawn();
             
             yield return null;
             ServiceLocatorController.Register(new GameplaySystemContainer(_cameraController));

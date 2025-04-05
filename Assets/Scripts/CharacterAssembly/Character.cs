@@ -24,7 +24,6 @@ namespace CharacterAssembly
 
         public void ReceiveDamage(float damage)
         {
-            Debug.LogError($"SAD {damage}");
             _statsProvider.ReceiveDamage(damage);
         }
     }

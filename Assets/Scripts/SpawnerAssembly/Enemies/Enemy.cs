@@ -12,6 +12,7 @@ namespace SpawnerAssembly
     {
         [SerializeField] private StatsProvider _statsProvider;
         [SerializeField] private GameObject _selector;
+        [SerializeField] private MoveToCharacter _moveToCharacter;
 
         public event Action OnDeath;
         
@@ -25,6 +26,7 @@ namespace SpawnerAssembly
         public void Setup(EnemiesParameters enemiesParameters)
         {
             _enemiesParameters = enemiesParameters;
+            _moveToCharacter.Setup();
             Respawn();
         }
 
