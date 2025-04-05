@@ -24,7 +24,7 @@ namespace AbilitiesAssembly
         public void Execute()
         {
             if (!_targetSelector.HasTarget) return;
-            
+            _characterDependency.Character.transform.LookAt(_targetSelector.TargetPosition);
             var projectile = _projectileSpawner.Spawn(ProjectileType.Fireball);
             projectile.transform.SetPositionAndRotation(_characterDependency.Character.Aim.position, Quaternion.identity);
             projectile.SetTarget(new ProjectileParameters(
