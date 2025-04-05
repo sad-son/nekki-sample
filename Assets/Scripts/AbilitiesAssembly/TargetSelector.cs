@@ -11,13 +11,16 @@ namespace AbilitiesAssembly
     public class TargetSelector : IAbilitySystemDependency
     {
         public Ray Ray { get; private set; }
+        public bool HasTarget => _target != null;
+        public Vector3 TargetPosition => !HasTarget ? Vector3.zero : _target.transform.position;
         
         private readonly InputExecutor _inputExecutor;
         
         private Enemy _target;
+        
         public TargetSelector()
         {
-            _inputExecutor = ServiceLocatorController.Resolve<InputSystemContainer>().Resolve<InputExecutor>();
+            _inputExecutor = ServiceLocatorController.Resolve<InputSystemContainer>().ResolveDependency<InputExecutor>();
             _inputExecutor.OnSelected += OnSelected;
         }
 
@@ -39,11 +42,25 @@ namespace AbilitiesAssembly
             {
                 if (hit.collider.CompareTag(TagsHelper.EnemyTag) && hit.collider.TryGetComponent<Enemy>(out var enemy))
                 {
-                    _target?.Unselect();
+                    UnSelect();
                     _target = enemy;
+                    _target.OnDeath += OnDeath;
                     _target.Select();
                 }
             }
+        }
+
+        private void UnSelect()
+        {
+            if (!HasTarget) return;
+            _target.OnDeath -= OnDeath;
+            _target.Unselect();
+        }
+
+        private void OnDeath()
+        {
+            _target.OnDeath -= OnDeath;
+            _target = null;
         }
     }
 }

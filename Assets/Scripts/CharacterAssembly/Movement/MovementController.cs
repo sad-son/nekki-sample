@@ -29,7 +29,7 @@ namespace CharacterAssembly.Movement
         
         private void Awake()
         {
-            _inputExecutor = ServiceLocatorController.Resolve<InputSystemContainer>().Resolve<InputExecutor>();
+            _inputExecutor = ServiceLocatorController.Resolve<InputSystemContainer>().ResolveDependency<InputExecutor>();
             _moversSettingsDictionary = _movementConfig.GetSettingsDictionary();
 
             _moversDictionary.Add(MoverType.Idle, new IdleMover(this, _moversSettingsDictionary[MoverType.Idle]));

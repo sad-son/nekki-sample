@@ -1,16 +1,43 @@
 ﻿using System;
+using AbilitiesAssembly;
+using CharacterAssembly.Stats;
 using PoolAssembly;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 namespace SpawnerAssembly
 {
-    public class Enemy : PoolObject
+    [RequireComponent(typeof(StatsProvider))]
+    public class Enemy : PoolObject, IDamageable
     {
+        [SerializeField] private StatsProvider _statsProvider;
         [SerializeField] private GameObject _selector;
 
+        public event Action OnDeath;
+        
+        private EnemiesParameters _enemiesParameters;
+        
         private void Awake()
         {
             Unselect();
+        }
+
+        public void Setup(EnemiesParameters enemiesParameters)
+        {
+            _enemiesParameters = enemiesParameters;
+            Respawn();
+        }
+
+        public void Respawn()
+        {
+            _statsProvider.Setup(_enemiesParameters.Health, _enemiesParameters.Armor, Death);
+        }
+
+        private void Death()
+        {
+            Unselect();
+            ReturnToPool();
+            OnDeath?.Invoke();
         }
 
         public void Select()
@@ -21,6 +48,11 @@ namespace SpawnerAssembly
         public void Unselect()
         { 
             _selector.gameObject.SetActive(false);
+        }
+
+        public void ReceiveDamage(float damage)
+        {
+            _statsProvider.ReceiveDamage(damage);
         }
     }
 }

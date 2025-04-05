@@ -10,6 +10,8 @@ namespace PoolAssembly
         private readonly UnityObjectPool<T> _pool;
         private readonly Func<T> _createObjectAction;
 
+        private Vector3 _defaultPosition = new Vector3(0f, 1000f, 0f);
+        
         public PoolManager(Func<T> createObjectAction, int defaultCapacity = 10, int maxSize = 10000)
         {
             _createObjectAction = createObjectAction;
@@ -44,7 +46,14 @@ namespace PoolAssembly
         private T CreateInstance()
         {
             var obj = _createObjectAction.Invoke();
+            obj.OnReleased += OnRelease;
+            obj.transform.position = _defaultPosition;
             return obj;
+        }
+
+        private void OnRelease(PoolObject obj)
+        {
+            OnPushObject(obj as T);
         }
 
         private void OnPopObject(T poolObject)
@@ -57,6 +66,7 @@ namespace PoolAssembly
         {
             if (!poolObject) return;
             poolObject.OnPush();
+            poolObject.transform.position = _defaultPosition;
             _pool.Release(poolObject);
         }
 

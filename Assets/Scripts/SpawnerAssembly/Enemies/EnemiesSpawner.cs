@@ -25,7 +25,12 @@ namespace SpawnerAssembly
             foreach (var enemyKvp in _enemiesParametersDictionary)
             {
                 var parameters = enemyKvp.Value;
-                var pool = new PoolManager<Enemy>(() => Object.Instantiate(parameters.EnemyPrefab, _enemiesRoot));
+                var pool = new PoolManager<Enemy>(() =>
+                {
+                    var enemy = Object.Instantiate(parameters.EnemyPrefab, _enemiesRoot);
+                    enemy.Setup(parameters);
+                    return enemy;
+                });
                 pool.CreateDefaultInstances(parameters.PoolSize);
 
                 _enemiesPoolDictionary[enemyKvp.Key] = pool;
@@ -44,6 +49,10 @@ namespace SpawnerAssembly
         
         public void Dispose()
         {
+            foreach (var kvp in _enemiesPoolDictionary)
+            {
+                kvp.Value.Dispose();
+            }
             _enemiesParametersDictionary?.Clear();
             _enemiesPoolDictionary?.Clear();
         }

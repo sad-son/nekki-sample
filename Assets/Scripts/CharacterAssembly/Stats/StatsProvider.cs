@@ -1,23 +1,35 @@
 ﻿using System;
 using Plugins.procedural_healthbar_shader.HealthBar.Components;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CharacterAssembly.Stats
 {
     public class StatsProvider : MonoBehaviour
     {
-        [SerializeField] private DefenseStats _defenseStats;
+        [field: SerializeField] public DefenseStats DefenseStats { get; private set; }
         [SerializeField] private HealthBar _healthBar;
         
-        private void Awake()
+        public void Setup(float health, float armor, Action deathCallback)
         {
-           // _defenseStats = new DefenseStats();
+            DefenseStats = new DefenseStats(health, armor, deathCallback);
+            UpdateHealthBar();
+        }
+
+        private void OnDestroy()
+        {
+            DefenseStats?.Dispose();
         }
 
         public void ReceiveDamage(float damage)
         {
-            _defenseStats.Hit(damage);
-            _healthBar.HealthNormalized = _defenseStats.Health / _defenseStats.MaxHealth;
+            DefenseStats.Hit(damage);
+            UpdateHealthBar();
+        }
+
+        private void UpdateHealthBar()
+        {
+            _healthBar.HealthNormalized = DefenseStats.Health / DefenseStats.MaxHealth;
         }
     }
 }

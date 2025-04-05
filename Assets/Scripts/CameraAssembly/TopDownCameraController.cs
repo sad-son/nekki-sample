@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CharacterAssembly;
 using ServiceLocatorSystem;
 using SpawnerAssembly;
 using UnityEngine;
@@ -26,8 +27,8 @@ namespace CameraAssembly
         {
             _cameraStates = _cameraConfig.GetSettingsDictionary();
             SetCameraState(CameraState.Idle);
-            _characterDependency = ServiceLocatorController.Resolve<SpawnerContainer>().Resolve<MyCharacterDependency>();
-            SetTarget(_characterDependency.Character);
+            _characterDependency = ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<MyCharacterDependency>();
+            SetTarget(_characterDependency.Character.transform);
         }
 
         private void OnDestroy()

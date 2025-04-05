@@ -9,7 +9,7 @@ public class GizmosDebugger : MonoBehaviour
         if (!Application.isPlaying) return;
         if (!ServiceLocatorController.TryResolve<AbilitiesSystemContainer>(out var abilitiesSystemContainer)) return;
         
-        var selector = abilitiesSystemContainer.Resolve<TargetSelector>();
+        var selector = abilitiesSystemContainer.ResolveDependency<TargetSelector>();
         var ray = selector.Ray;
         Gizmos.color = Color.red;
         Gizmos.DrawRay(ray.origin, ray.direction * Camera.main.farClipPlane); 

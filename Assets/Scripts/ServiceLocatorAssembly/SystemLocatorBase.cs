@@ -13,6 +13,8 @@ namespace ServiceLocatorSystem
             {
                 service.Value.Dispose();
             }
+            
+            _services.Clear();
         }
         
         private void RegisterTypesInternal()
@@ -22,7 +24,7 @@ namespace ServiceLocatorSystem
         
         protected abstract void RegisterTypes();
         
-        public T Resolve<T>() where T : TQueryType
+        public T ResolveDependency<T>() where T : TQueryType
         {
             return (T)_services[typeof(T)];
         }

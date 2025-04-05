@@ -16,5 +16,5 @@ MonoBehaviour:
   - <EnemiesType>k__BackingField: 0
     <EnemyPrefab>k__BackingField: {fileID: 1234057915655917680, guid: 1c83e7ffa83716c42a2fa266184aafc9, type: 3}
     <Health>k__BackingField: 100
-    <Armor>k__BackingField: 50
+    <Armor>k__BackingField: 0.5
     <PoolSize>k__BackingField: 10

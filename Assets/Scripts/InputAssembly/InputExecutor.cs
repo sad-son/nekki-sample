@@ -9,6 +9,7 @@ namespace InputAssembly
         private readonly PlayerInputActions _inputActions;
 
         public event Action OnSelected;
+        public event Action OnAttack;
         
         public Vector2 MoveInput { get; private set; }
         public bool Sprint { get; private set; }
@@ -22,6 +23,7 @@ namespace InputAssembly
             _inputActions.Player.Sprint.performed += OnSprint;
             _inputActions.Player.Sprint.canceled += OnSprintCanceled;
             _inputActions.Player.Select.performed += OnSelectPerformed;
+            _inputActions.Player.Attack.performed += OnAttackPerformed;
         }
         
         public void Dispose()
@@ -31,8 +33,14 @@ namespace InputAssembly
             _inputActions.Player.Sprint.performed -= OnSprint;
             _inputActions.Player.Sprint.canceled -= OnSprintCanceled;
             _inputActions.Player.Select.performed -= OnSelectPerformed;
+            _inputActions.Player.Attack.performed -= OnAttackPerformed;
             _inputActions.Disable();
             _inputActions.Dispose();
+        }
+
+        private void OnAttackPerformed(InputAction.CallbackContext obj)
+        {
+            OnAttack?.Invoke();
         }
 
         private void OnSelectPerformed(InputAction.CallbackContext obj)

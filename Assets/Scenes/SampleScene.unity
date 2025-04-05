@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 62126233}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.043741167, y: 0.9956814, z: 15.274381}
+  m_LocalPosition: {x: -0.043741167, y: 0, z: 15.274381}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f078f007a844539f7ed99104c09ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _respawnTime: 5
   _availableEnemies: 00000000
 --- !u!1 &330585543
 GameObject:
@@ -471,7 +472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 263858707386439628, guid: 0500386a7695c904c9f446badf6e9375, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.44
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 263858707386439628, guid: 0500386a7695c904c9f446badf6e9375, type: 3}
       propertyPath: m_LocalPosition.z
@@ -607,6 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f078f007a844539f7ed99104c09ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _respawnTime: 5
   _availableEnemies: 00000000
 --- !u!1 &908742054
 GameObject:
@@ -806,6 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f078f007a844539f7ed99104c09ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _respawnTime: 5
   _availableEnemies: 00000000
 --- !u!1 &1128811275
 GameObject:
@@ -958,15 +961,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraController: {fileID: 1403507416}
-  _enemiesConfig: {fileID: 11400000, guid: 056928c21ee4bc74b9e0d07e425f8757, type: 2}
-  _enemiesRoot: {fileID: 1168120798}
-  _characterPrefab: {fileID: 3972964382682025698, guid: 93b94039cf7541e8a7c9453819da38f0, type: 3}
-  _characterSpawnPoint: {fileID: 908742055}
+  _spawnDependencies:
+    <CharacterPrefab>k__BackingField: {fileID: 6819244900820485773, guid: 93b94039cf7541e8a7c9453819da38f0, type: 3}
+    <CharacterSpawnPoint>k__BackingField: {fileID: 908742055}
+    <EnemyRoot>k__BackingField: {fileID: 1168120798}
+    <ProjectilesRoot>k__BackingField: {fileID: 2100149819}
+  _configsContainer:
+    <AbilityConfig>k__BackingField: {fileID: 11400000, guid: ceaef55a5d7caf74582a2d980a10d191, type: 2}
+    <EnemiesConfig>k__BackingField: {fileID: 11400000, guid: 056928c21ee4bc74b9e0d07e425f8757, type: 2}
+    <ProjectilesConfig>k__BackingField: {fileID: 11400000, guid: 0326910bc270dd94c8d7e2a87cc73c36, type: 2}
   _enemySpawnPoints:
-  - {fileID: 887538933}
-  - {fileID: 1116772945}
-  - {fileID: 1345682448}
   - {fileID: 207091961}
+  - {fileID: 1345682448}
+  - {fileID: 1116772945}
+  - {fileID: 887538933}
 --- !u!4 &1129302110
 Transform:
   m_ObjectHideFlags: 0
@@ -1109,7 +1117,7 @@ Transform:
   m_GameObject: {fileID: 1168120797}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.043741167, y: 0.9956814, z: 15.274381}
+  m_LocalPosition: {x: -0.043741167, y: 0, z: 15.274381}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1295,6 +1303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f078f007a844539f7ed99104c09ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _respawnTime: 5
   _availableEnemies: 00000000
 --- !u!1 &1403507415
 GameObject:
@@ -1343,6 +1352,37 @@ Transform:
   - {fileID: 330585546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2100149818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100149819}
+  m_Layer: 0
+  m_Name: ---PROJECTILES---
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2100149819
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100149818}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.043741167, y: 0, z: 15.274381}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1352,6 +1392,7 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 908742055}
   - {fileID: 1168120798}
+  - {fileID: 2100149819}
   - {fileID: 1403507417}
   - {fileID: 502256916}
   - {fileID: 1140288455}
