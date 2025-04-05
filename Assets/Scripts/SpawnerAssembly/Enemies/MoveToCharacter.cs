@@ -24,7 +24,6 @@ namespace SpawnerAssembly
 
         private void Start()
         {
-            _navMeshAgent.enabled = false;
             Run();
         }
 
@@ -33,23 +32,38 @@ namespace SpawnerAssembly
             Run();
         }
 
-        private void OnDisable()
-        {
-            _navMeshAgent.enabled = false;
-        }
-
         private void Run()
         {
             _animator.SetBool(AnimatorHashes.Run, true);
-            _navMeshAgent.enabled = true;
+            _navMeshAgent.Warp(transform.position);
         }
         
         private void FixedUpdate()
         {
-            _navMeshAgent.SetDestination(_characterDependency.Character.transform.position);
+            if (_navMeshAgent.isOnNavMesh && _characterDependency.Character)
+                _navMeshAgent.SetDestination(_characterDependency.Character.transform.position);
+            else
+            {
+                TryPlaceOnNavMesh();
+            }
             SetRotation(_characterDependency.Character.transform.position, _rotationSpeed * Time.fixedDeltaTime);
         }
 
+        private void TryPlaceOnNavMesh()
+        {
+            if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+            {
+                transform.position = hit.position;
+                _navMeshAgent.Warp(hit.position);
+                if (_navMeshAgent.isOnNavMesh && _characterDependency.Character)
+                    _navMeshAgent.SetDestination(_characterDependency.Character.transform.position);
+            }
+            else
+            {
+                Debug.LogError("Don't find NavMesh near!");
+            }
+        }
+        
         private void SetRotation(Vector3 targetPosition, float time)
         {
             var directionToPlayer = (targetPosition - transform.position).normalized;
