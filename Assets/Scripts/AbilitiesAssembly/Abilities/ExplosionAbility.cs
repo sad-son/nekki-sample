@@ -1,4 +1,5 @@
 ﻿using AbilitiesAssembly.Aoe;
+using AbilitiesAssembly.Parameters;
 using CharacterAssembly;
 using ServiceLocatorAssembly;
 using SpawnerAssembly;

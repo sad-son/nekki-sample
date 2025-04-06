@@ -1,4 +1,5 @@
-﻿using AbilitiesAssembly.Projectiles;
+﻿using AbilitiesAssembly.Parameters;
+using AbilitiesAssembly.Projectiles;
 using CharacterAssembly;
 using ServiceLocatorAssembly;
 using SpawnerAssembly;

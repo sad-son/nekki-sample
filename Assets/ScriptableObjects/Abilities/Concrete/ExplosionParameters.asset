@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 0be5b78878224c15bb880a808600d9b8, type: 3}
   m_Name: ExplosionParameters
   m_EditorClassIdentifier: Assembly-CSharp:AbilitiesAssembly:AoeAbilityParameters
   <AbilityType>k__BackingField: 2
-  <MaxDistance>k__BackingField: 10
+  <MaxDistance>k__BackingField: 5
   <Damage>k__BackingField: 50
   <LifeTime>k__BackingField: 1

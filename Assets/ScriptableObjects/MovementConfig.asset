@@ -17,8 +17,8 @@ MonoBehaviour:
     <MovementSpeed>k__BackingField: 0
     <RotationSpeed>k__BackingField: 0
   - <MoverType>k__BackingField: 1
-    <MovementSpeed>k__BackingField: 3
-    <RotationSpeed>k__BackingField: 3
+    <MovementSpeed>k__BackingField: 5
+    <RotationSpeed>k__BackingField: 5
   - <MoverType>k__BackingField: 2
-    <MovementSpeed>k__BackingField: 6
-    <RotationSpeed>k__BackingField: 6
+    <MovementSpeed>k__BackingField: 9
+    <RotationSpeed>k__BackingField: 9

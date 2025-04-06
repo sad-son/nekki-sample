@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AbilitiesAssembly.Abilities;
+using AbilitiesAssembly.Parameters;
 using InputAssembly;
 using ServiceLocatorAssembly;
 using UnityEngine;
