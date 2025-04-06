@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using CharacterAssembly.Animation;
 using CharacterAssembly.Movement.Movers;
 using InputAssembly;
-using ServiceLocatorSystem;
+using ServiceLocatorAssembly;
 using UnityEngine;
 using UnityEngine.Assertions;
 

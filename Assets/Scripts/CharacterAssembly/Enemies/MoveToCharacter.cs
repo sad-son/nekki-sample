@@ -1,5 +1,5 @@
 ﻿using CharacterAssembly;
-using ServiceLocatorSystem;
+using ServiceLocatorAssembly;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,7 +18,7 @@ namespace SpawnerAssembly
 
         public void Setup()
         {
-            _characterDependency = ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<MyCharacterDependency>();
+            _characterDependency = ServiceLocatorController.Resolve<CharacterContainer>().ResolveDependency<MyCharacterDependency>();
             _rigidbody = GetComponent<Rigidbody>();
         }
 
@@ -35,7 +35,6 @@ namespace SpawnerAssembly
         private void Run()
         {
             _animator.SetBool(AnimatorHashes.Run, true);
-            _navMeshAgent.Warp(transform.position);
         }
         
         private void FixedUpdate()

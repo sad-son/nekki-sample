@@ -1,0 +1,20 @@
+{
+    "name": "CharacterAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a42da820e908c334eaf4e192bc41e14f",
+        "GUID:0de382c65b8a5bb498caf660aedff125",
+        "GUID:3cfb3d608b4ffe64ca2562c894e897d3",
+        "GUID:0ba1cbaae63dc7d47967d938c90d7471",
+        "GUID:00d2f21d2ae4e644e83ab6e848757f2c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

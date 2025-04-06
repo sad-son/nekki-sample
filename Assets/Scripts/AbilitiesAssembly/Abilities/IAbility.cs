@@ -1,4 +1,4 @@
-﻿namespace AbilitiesAssembly
+﻿namespace AbilitiesAssembly.Abilities
 {
     public interface IAbility
     {

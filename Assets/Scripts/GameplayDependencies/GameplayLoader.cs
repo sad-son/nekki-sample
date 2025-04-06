@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using AbilitiesAssembly;
 using CameraAssembly;
 using CharacterAssembly;
 using InputAssembly;
-using ServiceLocatorSystem;
+using ServiceLocatorAssembly;
 using SpawnerAssembly;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -15,6 +14,7 @@ namespace GameplayDependencies
     public class GameplayLoader : MonoBehaviour
     {
         [SerializeField] private TopDownCameraController _cameraController;
+        [SerializeField] private CharacterDependencies _characterDependencies;
         [SerializeField] private SpawnDependencies _spawnDependencies;
         [SerializeField] private ConfigsContainer _configsContainer;
         
@@ -29,6 +29,7 @@ namespace GameplayDependencies
         private IEnumerator Start()
         {
             ServiceLocatorController.Register(new InputSystemContainer());
+            ServiceLocatorController.Register(new CharacterContainer(_characterDependencies, _configsContainer.EnemiesConfig));
             ServiceLocatorController.Register(new SpawnerContainer(_spawnDependencies, _configsContainer));
             yield return null;
             ServiceLocatorController.Register(new GameplaySystemContainer(_cameraController));

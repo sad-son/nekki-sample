@@ -1,5 +1,5 @@
 ﻿using CameraAssembly;
-using ServiceLocatorSystem;
+using ServiceLocatorAssembly;
 
 namespace GameplayDependencies
 {

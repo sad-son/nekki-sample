@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace CharacterAssembly
+namespace CharacterAssembly.Animation
 {
     [RequireComponent(typeof(Animator))]
     public class AnimatorController : MonoBehaviour

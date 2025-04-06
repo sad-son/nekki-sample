@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AbilitiesAssembly.Abilities;
 using InputAssembly;
-using ServiceLocatorSystem;
+using ServiceLocatorAssembly;
 using UnityEngine;
 
 namespace AbilitiesAssembly

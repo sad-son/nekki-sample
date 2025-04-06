@@ -1,5 +1,4 @@
 ﻿using System;
-using Unity.Collections;
 using UnityEngine;
 
 namespace CharacterAssembly.Stats

@@ -1,10 +1,10 @@
 ﻿using AbilitiesAssembly.Projectiles;
 using CharacterAssembly;
-using ServiceLocatorSystem;
+using ServiceLocatorAssembly;
 using SpawnerAssembly;
 using UnityEngine;
 
-namespace AbilitiesAssembly
+namespace AbilitiesAssembly.Abilities
 {
     public class FireballAbility : IAbility
     {
@@ -18,7 +18,7 @@ namespace AbilitiesAssembly
             _projectileAbilityParameters = projectileAbilityParameters;
             _projectileSpawner = ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<ProjectileSpawner>();
             _targetSelector = ServiceLocatorController.Resolve<AbilitiesSystemContainer>().ResolveDependency<TargetSelector>();
-            _characterDependency = ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<MyCharacterDependency>();
+            _characterDependency = ServiceLocatorController.Resolve<CharacterContainer>().ResolveDependency<MyCharacterDependency>();
         }
 
         public void Execute()

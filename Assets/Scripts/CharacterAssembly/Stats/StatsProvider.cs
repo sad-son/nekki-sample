@@ -1,7 +1,6 @@
 ﻿using System;
 using Plugins.procedural_healthbar_shader.HealthBar.Components;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace CharacterAssembly.Stats
 {

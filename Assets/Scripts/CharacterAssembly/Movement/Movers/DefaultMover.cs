@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CharacterAssembly.Animation;
+using UnityEngine;
 
 namespace CharacterAssembly.Movement.Movers
 {

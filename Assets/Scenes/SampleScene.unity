@@ -1666,10 +1666,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraController: {fileID: 1403507416}
-  _spawnDependencies:
+  _characterDependencies:
     <CharacterPrefab>k__BackingField: {fileID: 6819244900820485773, guid: 93b94039cf7541e8a7c9453819da38f0, type: 3}
     <CharacterSpawnPoint>k__BackingField: {fileID: 908742055}
     <EnemyRoot>k__BackingField: {fileID: 1168120798}
+  _spawnDependencies:
     <ProjectilesRoot>k__BackingField: {fileID: 2100149819}
   _configsContainer:
     <AbilityConfig>k__BackingField: {fileID: 11400000, guid: ceaef55a5d7caf74582a2d980a10d191, type: 2}
@@ -1678,11 +1679,11 @@ MonoBehaviour:
     <AoeConfig>k__BackingField: {fileID: 11400000, guid: 9cc9602cbe6c4774e94e0196eaf1d894, type: 2}
   _enemySpawnPoints:
   - {fileID: 1464436726}
-  - {fileID: 662992834}
-  - {fileID: 887538933}
-  - {fileID: 1345682448}
-  - {fileID: 1116772945}
   - {fileID: 207091961}
+  - {fileID: 1345682448}
+  - {fileID: 662992834}
+  - {fileID: 1116772945}
+  - {fileID: 887538933}
 --- !u!4 &1129302110
 Transform:
   m_ObjectHideFlags: 0

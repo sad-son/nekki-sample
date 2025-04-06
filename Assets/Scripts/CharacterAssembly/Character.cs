@@ -1,6 +1,4 @@
-﻿using System;
-using AbilitiesAssembly;
-using CharacterAssembly.Stats;
+﻿using CharacterAssembly.Stats;
 using UnityEngine;
 
 namespace CharacterAssembly

@@ -1,7 +1,5 @@
 ﻿using System;
-using SpawnerAssembly;
 using UnityEngine;
-using UnityEngine.Pool;
 
 namespace PoolAssembly
 {
@@ -10,7 +8,7 @@ namespace PoolAssembly
         private readonly UnityObjectPool<T> _pool;
         private readonly Func<T> _createObjectAction;
 
-        private Vector3 _defaultPosition = new Vector3(0f, 1000f, 0f);
+        private readonly Vector3 _defaultPosition = new Vector3(0f, 1000f, 0f);
         
         public PoolManager(Func<T> createObjectAction, int defaultCapacity = 10, int maxSize = 10000)
         {

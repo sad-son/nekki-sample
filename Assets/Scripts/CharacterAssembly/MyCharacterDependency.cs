@@ -1,9 +1,8 @@
-﻿using GameplayDependencies;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CharacterAssembly
 {
-    public class MyCharacterDependency : IGameplayDependency
+    public class MyCharacterDependency : ICharacterDependency
     {
         private readonly Character _characterPrefab;
         private readonly Transform _spawnPoint;

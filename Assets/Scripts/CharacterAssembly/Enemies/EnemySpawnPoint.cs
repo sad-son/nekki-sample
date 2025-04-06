@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using CharacterAssembly;
-using ServiceLocatorSystem;
+using ServiceLocatorAssembly;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,12 +18,12 @@ namespace SpawnerAssembly
         {
             if (_availableEnemies == null || _availableEnemies.Count == 0) return;
             
-            var characterDependency = ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<MyCharacterDependency>();
+            var characterDependency = ServiceLocatorController.Resolve<CharacterContainer>().ResolveDependency<MyCharacterDependency>();
             transform.LookAt(characterDependency.Character.transform.position);
             
             var randomIndex = Random.Range(0, _availableEnemies.Count);
             var spawnType = _availableEnemies[randomIndex];
-            _currentEnemy = ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<EnemiesSpawner>().Spawn(spawnType);
+            _currentEnemy = ServiceLocatorController.Resolve<CharacterContainer>().ResolveDependency<EnemiesSpawner>().Spawn(spawnType);
             _currentEnemy.transform.SetPositionAndRotation(transform.position, transform.rotation);
             _currentEnemy.Respawn();
             _currentEnemy.OnDeath += Respawn;

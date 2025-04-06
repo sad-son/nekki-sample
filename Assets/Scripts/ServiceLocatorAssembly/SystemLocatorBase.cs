@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ServiceLocatorSystem
+namespace ServiceLocatorAssembly
 {
     public abstract class SystemLocatorBase<TQueryType> : IDisposable, IServiceLocator
     {

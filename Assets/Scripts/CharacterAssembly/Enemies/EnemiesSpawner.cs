@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using GameplayDependencies;
+using CharacterAssembly;
 using PoolAssembly;
 using UnityEngine;
 
 namespace SpawnerAssembly
 {
-    public class EnemiesSpawner : IGameplayDependency
+    public class EnemiesSpawner : ICharacterDependency
     {
         private readonly EnemiesConfig _enemiesConfig;
         private readonly Transform _enemiesRoot;

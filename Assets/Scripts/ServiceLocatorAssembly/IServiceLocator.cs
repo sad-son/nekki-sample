@@ -1,4 +1,4 @@
-﻿namespace ServiceLocatorSystem
+﻿namespace ServiceLocatorAssembly
 {
     public interface IServiceLocator
     {

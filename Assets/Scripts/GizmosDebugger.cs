@@ -1,5 +1,5 @@
 ﻿using AbilitiesAssembly;
-using ServiceLocatorSystem;
+using ServiceLocatorAssembly;
 using UnityEngine;
 
 public class GizmosDebugger : MonoBehaviour

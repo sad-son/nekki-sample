@@ -1,10 +1,10 @@
 ﻿using AbilitiesAssembly.Aoe;
 using CharacterAssembly;
-using ServiceLocatorSystem;
+using ServiceLocatorAssembly;
 using SpawnerAssembly;
 using UnityEngine;
 
-namespace AbilitiesAssembly
+namespace AbilitiesAssembly.Abilities
 {
     public class ExplosionAbility : IAbility
     {
@@ -18,7 +18,7 @@ namespace AbilitiesAssembly
             _aoeAbilityParameters = aoeAbilityParameters;
             _aoeSpawner = ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<AoeSpawner>();
             _targetSelector = ServiceLocatorController.Resolve<AbilitiesSystemContainer>().ResolveDependency<TargetSelector>();
-            _characterDependency = ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<MyCharacterDependency>();
+            _characterDependency = ServiceLocatorController.Resolve<CharacterContainer>().ResolveDependency<MyCharacterDependency>();
         }
 
         public void Execute()

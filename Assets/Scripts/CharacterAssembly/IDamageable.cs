@@ -1,4 +1,4 @@
-﻿namespace AbilitiesAssembly
+﻿namespace CharacterAssembly
 {
     public interface IDamageable
     {
