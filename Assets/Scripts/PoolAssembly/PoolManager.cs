@@ -64,8 +64,8 @@ namespace PoolAssembly
         {
             if (!poolObject) return;
             poolObject.OnPush();
-            poolObject.transform.position = _defaultPosition;
             _pool.Release(poolObject);
+            poolObject.transform.position = _defaultPosition;
         }
 
         private void OnDestroyObject(T poolObject)
