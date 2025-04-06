@@ -259,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 62126234}
   m_Layer: 0
-  m_Name: EnemiesPoint
+  m_Name: ---ENEMIES-SPAWN-POINTS---
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3291,15 +3291,15 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1129302110}
-  - {fileID: 410087041}
-  - {fileID: 832575519}
   - {fileID: 908742055}
+  - {fileID: 62126234}
   - {fileID: 1168120798}
   - {fileID: 2100149819}
   - {fileID: 1403507417}
+  - {fileID: 2102467717}
+  - {fileID: 410087041}
+  - {fileID: 832575519}
   - {fileID: 1140288455}
   - {fileID: 971771615}
-  - {fileID: 62126234}
   - {fileID: 983325327}
-  - {fileID: 2102467717}
   - {fileID: 1693556338}

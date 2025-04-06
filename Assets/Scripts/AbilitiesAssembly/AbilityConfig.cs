@@ -6,27 +6,25 @@ namespace AbilitiesAssembly
     [CreateAssetMenu(menuName = "Data/" + nameof(AbilityConfig), fileName = nameof(AbilityConfig))]
     public class AbilityConfig : ScriptableObject
     {
-        [SerializeField] private List<ProjectileAbilityParameters> _projectileParameters;
-        [SerializeField] private List<AoeAbilityParameters> _aoeParameters;
+        [SerializeField] private List<AbilityParameters> _abilityParameters;
 
-        public Dictionary<AbilityType, ProjectileAbilityParameters> GetProjectileParametersDictionary()
+        private Dictionary<AbilityType, AbilityParameters> _cachedAbilityParametersDictionary;
+    
+        public T GetAbilityParameters<T>(AbilityType abilityType) where T : AbilityParameters
         {
-            var result = new Dictionary<AbilityType, ProjectileAbilityParameters>();
-            foreach (var parameters in _projectileParameters)
-            {
-                if (!result.TryAdd(parameters.AbilityType, parameters))
-                {
-                    Debug.LogWarning($"Duplicate setting: {parameters.AbilityType}");
-                }
-            }
+            _cachedAbilityParametersDictionary ??= GetParametersDictionary();
             
-            return result;
+            if (_cachedAbilityParametersDictionary.TryGetValue(abilityType, out var parameters) 
+                && parameters is T value) 
+                return value;
+
+            return null;
         }
-        
-        public Dictionary<AbilityType, AoeAbilityParameters> GetAoeParametersDictionary()
+
+        private Dictionary<AbilityType, AbilityParameters> GetParametersDictionary()
         {
-            var result = new Dictionary<AbilityType, AoeAbilityParameters>();
-            foreach (var parameters in _aoeParameters)
+            var result = new Dictionary<AbilityType, AbilityParameters>();
+            foreach (var parameters in _abilityParameters)
             {
                 if (!result.TryAdd(parameters.AbilityType, parameters))
                 {

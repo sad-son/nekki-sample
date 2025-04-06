@@ -14,10 +14,7 @@ namespace AbilitiesAssembly
         public event Action<AbilityType> OnAbilitySelected;
         
         private readonly AbilityConfig _abilityConfig;
-        private readonly Dictionary<AbilityType, ProjectileAbilityParameters> _projectileParameters;
-        private readonly Dictionary<AbilityType, AoeAbilityParameters> _aoeAbilityParameters;
         private readonly InputExecutor _inputExecutor;
-        
         
         private Dictionary<AbilityType, IAbility> _abilitiesDictionary;
         private AbilityType[] _abilityTypes;
@@ -27,8 +24,6 @@ namespace AbilitiesAssembly
         public AbilityExecutor(AbilityConfig abilityConfig)
         {
             _abilityConfig = abilityConfig;
-            _projectileParameters = _abilityConfig.GetProjectileParametersDictionary();
-            _aoeAbilityParameters = _abilityConfig.GetAoeParametersDictionary();
             CreateAbilities();
             
             _inputExecutor = ServiceLocatorController.Resolve<InputSystemContainer>().ResolveDependency<InputExecutor>();
@@ -66,10 +61,13 @@ namespace AbilitiesAssembly
 
         private void CreateAbilities()
         {
+            var fireballParams = _abilityConfig.GetAbilityParameters<ProjectileAbilityParameters>(AbilityType.Fireball);
+            var explosionParams = _abilityConfig.GetAbilityParameters<AoeAbilityParameters>(AbilityType.Explosion);
+            
             _abilitiesDictionary = new()
             {
-                [AbilityType.Fireball] = new FireballAbility(_projectileParameters[AbilityType.Fireball]),
-                [AbilityType.Explosion] = new ExplosionAbility(_aoeAbilityParameters[AbilityType.Explosion])
+                [AbilityType.Fireball] = new FireballAbility(fireballParams),
+                [AbilityType.Explosion] = new ExplosionAbility(explosionParams)
             };
 
             _abilityTypes = _abilitiesDictionary.Keys.ToArray();

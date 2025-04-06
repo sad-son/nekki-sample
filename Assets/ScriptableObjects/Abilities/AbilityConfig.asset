@@ -12,14 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585f33301c5d40da9e47cdb02a4a5bec, type: 3}
   m_Name: AbilityConfig
   m_EditorClassIdentifier: 
-  _projectileParameters:
-  - <AbilityType>k__BackingField: 1
-    <Damage>k__BackingField: 30
-    <LifeTime>k__BackingField: 2
-    <MaxDistance>k__BackingField: 30
-    <Speed>k__BackingField: 10
-  _aoeParameters:
-  - <AbilityType>k__BackingField: 2
-    <MaxDistance>k__BackingField: 5
-    <Damage>k__BackingField: 50
-    <LifeTime>k__BackingField: 1
+  _abilityParameters:
+  - {fileID: 11400000, guid: 6fa4bcea44b943046a2c57fcef8b887d, type: 2}
+  - {fileID: 11400000, guid: a21f4f5c488e89340b04b1f71af3da2b, type: 2}
+  _projectileParameters: []
+  _aoeParameters: []
