@@ -27,7 +27,7 @@ namespace SpawnerAssembly
                 var parameters = enemyKvp.Value;
                 var pool = new PoolManager<Enemy>(() =>
                 {
-                    var enemy = Object.Instantiate(parameters.EnemyPrefab, _enemiesRoot);
+                    var enemy = Object.Instantiate(parameters.EnemyPrefab, _enemiesRoot, true);
                     enemy.Setup(parameters);
                     return enemy;
                 });
