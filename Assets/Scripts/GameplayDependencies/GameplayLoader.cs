@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using AbilitiesAssembly;
 using CameraAssembly;
@@ -29,9 +30,6 @@ namespace GameplayDependencies
         {
             ServiceLocatorController.Register(new InputSystemContainer());
             ServiceLocatorController.Register(new SpawnerContainer(_spawnDependencies, _configsContainer));
-            
-            //ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<MyCharacterDependency>().Spawn();
-            
             yield return null;
             ServiceLocatorController.Register(new GameplaySystemContainer(_cameraController));
             ServiceLocatorController.Register(new AbilitiesSystemContainer(_configsContainer.AbilityConfig));
@@ -40,6 +38,13 @@ namespace GameplayDependencies
             {
                 enemySpawnPoint.Spawn();
             }
+            
+            ServiceLocatorController.Ready();
+        }
+
+        private void OnDestroy()
+        {
+            ServiceLocatorController.Dispose();
         }
 
         public void CollectSpawnPoint(EnemySpawnPoint[] enemySpawnPoints)

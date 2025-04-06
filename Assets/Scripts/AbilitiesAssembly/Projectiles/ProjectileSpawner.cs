@@ -11,17 +11,16 @@ namespace AbilitiesAssembly.Projectiles
         public const int DEFAULT_POOL_SIZE = 10;
             
         private readonly Dictionary<ProjectileType, PoolManager<Projectile>> _projectilePoolManagers = new();
-        private readonly Dictionary<ProjectileType, Projectile> _projectileByType = new();
         
         private readonly ProjectilesConfig _projectilesConfig;
         private readonly Transform _projectilesRoot;
+        
         public ProjectileSpawner(ProjectilesConfig projectilesConfig, Transform projectilesRoot)
         {
             _projectilesRoot = projectilesRoot;
             _projectilesConfig = projectilesConfig;
-            _projectileByType = _projectilesConfig.GetDictionary();
 
-            foreach (var projectileKvp in _projectileByType)
+            foreach (var projectileKvp in _projectilesConfig.GetDictionary())
             {
                 var prefab = projectileKvp.Value;
                 CreatePool(projectileKvp.Key, prefab);
@@ -35,7 +34,6 @@ namespace AbilitiesAssembly.Projectiles
                 kvp.Value.Dispose();
             }
             _projectilePoolManagers.Clear();
-            _projectileByType.Clear();
         }
         
         private void CreatePool(ProjectileType type, Projectile projectilePrefab)

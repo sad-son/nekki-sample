@@ -8,6 +8,8 @@ namespace InputAssembly
     {
         private readonly PlayerInputActions _inputActions;
 
+        public event Action OnNextAbility;
+        public event Action OnPreviousAbility;
         public event Action OnSelected;
         public event Action OnAttack;
         
@@ -24,6 +26,8 @@ namespace InputAssembly
             _inputActions.Player.Sprint.canceled += OnSprintCanceled;
             _inputActions.Player.Select.performed += OnSelectPerformed;
             _inputActions.Player.Attack.performed += OnAttackPerformed;
+            _inputActions.Player.NextAbility.performed += OnNextAbilityPerformed;
+            _inputActions.Player.PreviousAbility.performed += OnPreviousAbilityPerformed;
         }
         
         public void Dispose()
@@ -34,8 +38,20 @@ namespace InputAssembly
             _inputActions.Player.Sprint.canceled -= OnSprintCanceled;
             _inputActions.Player.Select.performed -= OnSelectPerformed;
             _inputActions.Player.Attack.performed -= OnAttackPerformed;
+            _inputActions.Player.NextAbility.performed -= OnNextAbilityPerformed;
+            _inputActions.Player.PreviousAbility.performed -= OnPreviousAbilityPerformed;
             _inputActions.Disable();
             _inputActions.Dispose();
+        }
+
+        private void OnNextAbilityPerformed(InputAction.CallbackContext obj)
+        {
+            OnNextAbility?.Invoke();
+        }
+
+        private void OnPreviousAbilityPerformed(InputAction.CallbackContext obj)
+        {
+            OnPreviousAbility?.Invoke();
         }
 
         private void OnAttackPerformed(InputAction.CallbackContext obj)

@@ -1,4 +1,5 @@
-﻿using AbilitiesAssembly.Projectiles;
+﻿using AbilitiesAssembly.Aoe;
+using AbilitiesAssembly.Projectiles;
 using CharacterAssembly;
 using GameplayDependencies;
 using ServiceLocatorSystem;
@@ -28,6 +29,7 @@ namespace SpawnerAssembly
             Register(new MyCharacterDependency(_characterPrefab, _characterSpawnPoint));
             Register(new EnemiesSpawner(_configsContainer.EnemiesConfig, _enemiesRoot));
             Register(new ProjectileSpawner(_configsContainer.ProjectilesConfig, _projectilesRoot));
+            Register(new AoeSpawner(_configsContainer.AoeConfig, _projectilesRoot));
         }
     }
 }

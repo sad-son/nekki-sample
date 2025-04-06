@@ -8,14 +8,14 @@ namespace AbilitiesAssembly
 {
     public class FireballAbility : IAbility
     {
-        private readonly AbilitiesParameters _abilitiesParameters;
+        private readonly ProjectileAbilityParameters _projectileAbilityParameters;
         private readonly ProjectileSpawner _projectileSpawner;
         private readonly MyCharacterDependency _characterDependency;
         private readonly TargetSelector _targetSelector;
 
-        public FireballAbility(AbilitiesParameters abilitiesParameters)
+        public FireballAbility(ProjectileAbilityParameters projectileAbilityParameters)
         {
-            _abilitiesParameters = abilitiesParameters;
+            _projectileAbilityParameters = projectileAbilityParameters;
             _projectileSpawner = ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<ProjectileSpawner>();
             _targetSelector = ServiceLocatorController.Resolve<AbilitiesSystemContainer>().ResolveDependency<TargetSelector>();
             _characterDependency = ServiceLocatorController.Resolve<SpawnerContainer>().ResolveDependency<MyCharacterDependency>();
@@ -27,11 +27,12 @@ namespace AbilitiesAssembly
             _characterDependency.Character.transform.LookAt(_targetSelector.TargetPosition);
             var projectile = _projectileSpawner.Spawn(ProjectileType.Fireball);
             projectile.transform.SetPositionAndRotation(_characterDependency.Character.Aim.position, Quaternion.identity);
+            
             projectile.SetTarget(new ProjectileParameters(
-                lifeTime: _abilitiesParameters.LifeTime,
-                maxDistance: _abilitiesParameters.MaxDistance,
-                speed: _abilitiesParameters.Speed,
-                damage: _abilitiesParameters.Damage,
+                lifeTime: _projectileAbilityParameters.LifeTime,
+                maxDistance: _projectileAbilityParameters.MaxDistance,
+                speed: _projectileAbilityParameters.Speed,
+                damage: _projectileAbilityParameters.Damage,
                 target: _targetSelector.TargetPosition));
         }
     }

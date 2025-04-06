@@ -2,6 +2,7 @@
 {
     public enum EnemiesType
     {
-        Orc = 0
+        Orc = 0,
+        Dragon = 1
     }
 }

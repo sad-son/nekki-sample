@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 585f33301c5d40da9e47cdb02a4a5bec, type: 3}
-  m_Name: AbilityConfig
+  m_Script: {fileID: 11500000, guid: 223297c7759a415498a9886bc3534ff9, type: 3}
+  m_Name: AoeConfig
   m_EditorClassIdentifier: 
-  _abilitiesParameters:
-  - <AbilityType>k__BackingField: 1
-    <Damage>k__BackingField: 100
-    <LifeTime>k__BackingField: 2
-    <MaxDistance>k__BackingField: 30
-    <Speed>k__BackingField: 15
+  _aoeAreas:
+  - {fileID: 297059134826997914, guid: 5ed0a013702bd9f42847584f2fba7b21, type: 3}

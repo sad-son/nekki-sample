@@ -5,6 +5,9 @@ namespace ServiceLocatorSystem
 {
     public static class ServiceLocatorController
     {
+        public static event Action ServiceLocatorInitialized;
+        public static bool Initialized { get; private set; }
+        
         private static readonly Dictionary<Type, object> _services = new();
         
         public static bool TryResolve<T>(out T value) where T : class, IServiceLocator
@@ -32,6 +35,39 @@ namespace ServiceLocatorSystem
                 disposable.Dispose();
             
             _services.Remove(typeof(T));
+        }
+
+        public static void TryWaitDependenciesInjected(Action action)
+        {
+            if (Initialized)
+            {
+                action?.Invoke();
+            }
+            else
+            {
+                ServiceLocatorInitialized += InitializeHandler;
+            }
+
+            return;
+
+            void InitializeHandler()
+            {
+                action?.Invoke();
+                ServiceLocatorInitialized -= InitializeHandler;
+            }
+        }
+
+        
+        public static void Ready()
+        {
+            Initialized = true;
+            ServiceLocatorInitialized?.Invoke();
+        }
+
+        public static void Dispose()
+        {
+            Initialized = false;
+            ServiceLocatorInitialized = null;
         }
     }
 }

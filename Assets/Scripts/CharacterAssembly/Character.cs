@@ -19,6 +19,7 @@ namespace CharacterAssembly
 
         private void Death()
         {
+            _statsProvider.Setup(100, _maxArmor, Death);
             Debug.LogError($"Character is dead");
         }
 

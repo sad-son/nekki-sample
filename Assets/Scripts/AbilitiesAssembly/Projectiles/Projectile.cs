@@ -45,7 +45,6 @@ namespace AbilitiesAssembly.Projectiles
             if (other.gameObject.TryGetComponent<IDamageable>(out var damageable))
             {
                 damageable.ReceiveDamage(_projectileParameters.Damage);
-                ReturnToPool();
             }
         }
     }

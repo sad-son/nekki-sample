@@ -1,17 +1,33 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AbilitiesAssembly
 {
     [CreateAssetMenu(menuName = "Data/" + nameof(AbilityConfig), fileName = nameof(AbilityConfig))]
     public class AbilityConfig : ScriptableObject
     {
-        [SerializeField] private List<AbilitiesParameters> _abilitiesParameters;
+        [SerializeField] private List<ProjectileAbilityParameters> _projectileParameters;
+        [SerializeField] private List<AoeAbilityParameters> _aoeParameters;
 
-        public Dictionary<AbilityType, AbilitiesParameters> GetParametersDictionary()
+        public Dictionary<AbilityType, ProjectileAbilityParameters> GetProjectileParametersDictionary()
         {
-            var result = new Dictionary<AbilityType, AbilitiesParameters>();
-            foreach (var parameters in _abilitiesParameters)
+            var result = new Dictionary<AbilityType, ProjectileAbilityParameters>();
+            foreach (var parameters in _projectileParameters)
+            {
+                if (!result.TryAdd(parameters.AbilityType, parameters))
+                {
+                    Debug.LogWarning($"Duplicate setting: {parameters.AbilityType}");
+                }
+            }
+            
+            return result;
+        }
+        
+        public Dictionary<AbilityType, AoeAbilityParameters> GetAoeParametersDictionary()
+        {
+            var result = new Dictionary<AbilityType, AoeAbilityParameters>();
+            foreach (var parameters in _aoeParameters)
             {
                 if (!result.TryAdd(parameters.AbilityType, parameters))
                 {
